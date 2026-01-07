@@ -205,3 +205,16 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Data files (not tracked)
+Daten/
+*.csv
+*.zip
+
+# Outputs
+outputs/
+
+# Python
+__pycache__/
+.venv/
+
