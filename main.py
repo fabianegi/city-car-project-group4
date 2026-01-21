@@ -90,7 +90,14 @@ def main():
     marker_line_style = {"width": 1, "color": "#ecf0f1"}
 
     
-    
+
+
+
+   # 1. Berechnung der spezifischen Konversionsrate für den Hinweistext
+    # Index 3 ist 'Accepted', Index 4 ist 'Completed'
+    acc_val = funnel_data['counts'][3]
+    comp_val = funnel_data['counts'][4]
+    conv_rate = (comp_val / acc_val) * 100 if acc_val > 0 else 0 
     
     # ---------------------------------------------------------
     # DEINE INTEGRATION: CHART 1: Der Detaillierte Funnel
@@ -109,18 +116,34 @@ def main():
         textfont = dict(family="Arial", size=13, color="white")
     ))
 
+
     fig1.update_layout(
-        title="1. Funnel Analyse: Drop-Off pro Stufe", 
+        title="1. Funnel Analyse: Hoher Verlust nach Annahme der Fahrt", 
         template="plotly_white", 
+        margin=dict(r=160)
     )
+
+    fig1.add_annotation(
+        x=comp_val, 
+        y="Completed",
+        text=f"<b>ACHTUNG!</b><br>Nur {conv_rate:.1f}% der akzeptierten<br>Fahrten werden beendet.",
+        showarrow=True,
+        arrowhead=2,
+        arrowcolor="red",
+        arrowsize=1.5,
+        ax=100, # Verschiebung des Textes nach rechts
+        ay=0,
+        font=dict(color="red", size=14),
+        bgcolor="white",
+        bordercolor="red",
+        borderwidth=1
+    )
+
+
 
     fig1.show()
 
 
-
-    
-    
-    
     
     # ---------------------------------------------------------
     # GRAFIK 1: Prozent des Vorherigen (Wo ist der Drop-Off?)
