@@ -82,16 +82,50 @@ def main():
     ]
 
     # Wir verwenden diese Palette
-    my_colors = cool_to_warm_colors
+    my_colors = cool_to_warm_colors        ## Warum doppelte Bennenung der Variable ? 
 
     # Styling für die Verbindungslinien
     connector_style = {"line": {"color": "#bdc3c7", "dash": "dot", "width": 2}}
     # Styling für den Rahmen der Balken
     marker_line_style = {"width": 1, "color": "#ecf0f1"}
 
+    
+    
+    
+    # ---------------------------------------------------------
+    # DEINE INTEGRATION: CHART 1: Der Detaillierte Funnel
+    # ---------------------------------------------------------
+    print("Erstelle detaillierten Funnel (Frage 1)...")
+    
+    fig1 = go.Figure(go.Funnel(
+        y = funnel_data['steps'],
+        x = funnel_data['counts'],
+        textposition = "inside",
+        textinfo = "value+percent initial+percent previous",
+        opacity = 0.85, 
+        marker = {"color": cool_to_warm_colors,
+                  "line": marker_line_style},
+        connector = connector_style,
+        textfont = dict(family="Arial", size=13, color="white")
+    ))
+
+    fig1.update_layout(
+        title="1. Funnel Analyse: Drop-Off pro Stufe", 
+        template="plotly_white", 
+    )
+
+    fig1.show()
+
+
+
+    
+    
+    
+    
     # ---------------------------------------------------------
     # GRAFIK 1: Prozent des Vorherigen (Wo ist der Drop-Off?)
     # ---------------------------------------------------------
+    """
     fig_prev = go.Figure(go.Funnel(
         name='Step-by-Step',
         y=funnel_data['steps'],
@@ -117,10 +151,11 @@ def main():
     )
 
     fig_prev.show()
-
+    """
     # ---------------------------------------------------------
     # GRAFIK 2: Prozent der Gesamtheit (Wie viele schaffen es bis zum Ende?)
     # ---------------------------------------------------------
+    """
     print("Erstelle Grafik für 'Prozent der Gesamtheit'...")
 
     # Für die zweite Grafik nutzen wir dieselben Farben für Konsistenz
@@ -148,6 +183,8 @@ def main():
     )
 
     fig_total.show()
+    """
+
     # Dropoff check
     """
     Untersucht, warum Fahrten akzeptiert, aber nicht abgeschlossen werden.
