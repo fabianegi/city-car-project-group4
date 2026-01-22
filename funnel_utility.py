@@ -154,12 +154,9 @@ class CityCarDataHandler:
 
 # Realität: Wie lange dauert es im Median, bis akzeptiert wird?
 
-        search_reality = (self.df_requests[self.df_requests['accept_ts'].notna()]['accept_ts'] -
+        search_reality = (self.df_requests[self.df_requests['accept_ts'].notna()]['accept_ts'] - self.df_requests[self.df_requests['accept_ts'].notna()]['request_ts']).dt.total_seconds().median() / 60
 
-
-        self.df_requests[self.df_requests['accept_ts'].notna()]['request_ts']).dt.total_seconds().median() / 60
-
-# Geduld: Wie lange warten Nutzer, die dann abbrechen (ohne Zusage)?
+# Geduld: Wie lange warten Nutzer, die dann abbrechen (ohne Zusage). Diese Gruppe ist für uns, als Verkäufer relevant (kein Survivorship Bias)?
 
 
         search_patience = (self.df_requests[(self.df_requests['cancel_ts'].notna()) & (self.df_requests['accept_ts'].isna())]['cancel_ts'] -
