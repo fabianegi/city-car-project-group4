@@ -118,7 +118,23 @@ def main():
         )
     )
 
-    fig1.show()
+    config = {
+
+            'toImageButtonOptions': {
+            'format': 'png',
+           'filename': 'funnelanalysis',
+            'height': 800,
+            'width': 1200,
+            'scale': 3
+
+}
+
+}
+
+
+    fig1.show(config=config) 
+
+    
 
     # Plattform-Analyse
     print("Berechne Plattform-Daten...")
